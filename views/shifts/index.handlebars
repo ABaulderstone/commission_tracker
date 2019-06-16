@@ -1,0 +1,10 @@
+<h1> Shifts </h1>
+
+{{#each shifts}}
+    <div>
+        <p>Date: {{ this.date }}</p>
+    </div>
+    <a href="/books/{{this._id}}">View Shift</a>
+    <hr />
+
+{{/each}}
