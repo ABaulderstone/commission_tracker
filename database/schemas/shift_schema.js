@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
+const SaleSchema = require("./sale_schema")
 const ShiftSchema = new Schema({
 
     date: {
@@ -8,6 +8,7 @@ const ShiftSchema = new Schema({
         required: true,
         default: Date.now()
     },
+    sales: [Sales]
 
 });
 

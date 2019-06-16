@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const shiftRoutes = require("./shift_routes")
+const ShiftController = require("./../controllers/shift_controller");
 
-router.use("/shifts", shiftRoutes);
+
+
 module.exports = router;
