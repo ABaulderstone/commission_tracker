@@ -12,3 +12,8 @@ async function create(req, res) {
     res.redirect("/shifts");
 
 }
+
+module.exports = {
+    index,
+    create
+}

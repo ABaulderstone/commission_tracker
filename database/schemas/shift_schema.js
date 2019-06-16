@@ -8,7 +8,11 @@ const ShiftSchema = new Schema({
         required: true,
         default: Date.now()
     },
-    sales: [Sales]
+    notes: {
+        type: String, 
+        required: false,
+    },
+    sales: [SaleSchema]
 
 });
 
