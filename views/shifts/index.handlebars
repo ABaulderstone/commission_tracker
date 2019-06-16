@@ -1,13 +1,13 @@
 <h1> Shifts </h1>
-<a href="/shifts/?_method=POST">Start shift</a>
+<a href="/shifts/new">Create a new shift</a>
 
 
 {{#each shifts}}
     <div>
-        {{this}}
         <p>Date: {{ this.date }}</p>
+        <p>Notes: {{this.notes}}</p>
     </div>
-    <a href="/books/{{this._id}}">View Shift</a>
+    <a href="/shifts/{{this._id}}">View Shift</a>
     <hr />
 
 {{/each}}
