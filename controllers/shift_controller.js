@@ -1,4 +1,5 @@
 const ShiftModel = require("./../database/models/shift_model");
+const calculate = require("./../utils/calcuation_functions");
 
 async function index(req, res) {
     let shifts = await ShiftModel.find();
@@ -21,11 +22,8 @@ function make(req, res){
 async function show (req, res) {
     let {id} = req.params;
     let shift = await ShiftModel.findById(id);
-    let total = 0;
-    shift.sales.forEach( value => {
-        total += value.amount;
-    });
-    let average = total / shift.sales.length || 0;
+    let total = calculate.shiftTotal(shift.sales);
+    let average = calculate.shiftAverage(shift.sales, total);
 
 
     res.render("shifts/show", { shift, total, average });

@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const app = express();
 const port = 3000;
+const celebrate = require("celebrate");
 
 mongoose.connect("mongodb://localhost/commission_tracker", { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
@@ -20,5 +21,7 @@ app.use(express.json());
 
 
 app.use(require("./routes"));
+app.use(celebrate.errors());
+
 
 app.listen(port, () => console.log(`Server is listening on port ${port}`));

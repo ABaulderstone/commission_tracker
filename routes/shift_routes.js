@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const ShiftController = require("./../controllers/shift_controller");
-const SaleController = require("./../controllers/sale_controller")
+const SaleController = require("./../controllers/sale_controller");
+const {celebrate, Joi, errors} = require("celebrate");
 
 router.get("/", ShiftController.index);
 
