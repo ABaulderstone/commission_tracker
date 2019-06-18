@@ -24,9 +24,10 @@ async function show (req, res) {
     let shift = await ShiftModel.findById(id);
     let total = calculate.shiftTotal(shift.sales);
     let average = calculate.shiftAverage(shift.sales, total);
+    shift = await ShiftModel.findByIdAndUpdate(id, {$set: {total: total, average: average}}, {new: true})
 
 
-    res.render("shifts/show", { shift, total, average });
+    res.render("shifts/show", {shift});
 }
 
 module.exports = {

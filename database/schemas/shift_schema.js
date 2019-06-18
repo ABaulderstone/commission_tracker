@@ -6,11 +6,22 @@ const ShiftSchema = new Schema({
     date: {
         type: Date,
         required: true,
-        default: Date.now()
+        default: Date
     },
     notes: {
         type: String, 
         required: false,
+    },
+    total: {
+        type: Number, 
+        required: true,
+        default: 0
+
+    }, 
+    average: {
+        type: Number,
+        required: true,
+        default: 0 
     },
     sales: [SaleSchema]
 
