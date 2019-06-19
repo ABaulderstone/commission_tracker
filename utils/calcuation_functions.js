@@ -8,7 +8,7 @@ return total;
 
 }
 
-function shiftAverage(sales, total){
+function averageSaleVaue(sales, total){
     if (sales.length > 0) {
     return total / (sales.length);
     }
@@ -16,7 +16,22 @@ function shiftAverage(sales, total){
 
 }
 
+function averageShiftTotal(shifts){
+    let length = shifts.length 
+    let total = 0;
+    shifts.forEach(shift => {
+        total +=shift.total
+    });
+
+    return (total / length);
+
+}
+
+
+
 module.exports = {
     shiftTotal,
-    shiftAverage
+    averageSaleVaue,
+    averageShiftTotal
+    
 }
