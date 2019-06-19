@@ -1,13 +1,12 @@
 <h1>{{shift.date}}</h1> 
 <h2> {{shift.notes}} </h2>
 
-<p>Shift Total:  ${{total}}</p>
-<p> Average Sale: ${{average}}</p>
+<p>Shift Total:  ${{shift.total}}</p>
+<p></p> Average Sale: ${{shift.average}}</p>
 
 {{#each shift.sales}}
     <div>
-        <h4>${{this.amount}}</h4>
-        <p>{{this.notes}}</p>
+        <p><span>${{this.amount}}</span> : {{this.notes}}</p>
     </div>
 {{/each}}
 
