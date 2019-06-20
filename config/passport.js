@@ -5,57 +5,62 @@ const { Strategy: JwtStrategy, ExtractJwt } = require("passport-jwt");
 const UserModel = require("./../database/models/user_model");
 
 passport.serializeUser((user, done) => {
-    done(null, user._id);
+  done(null, user._id);
 });
 
 passport.deserializeUser(async (id, done) => {
-    try {
-        const user = await UserModel.findById(id);
-        return done(null, user);
-    } catch (error) {
-        return done(error);
-    }
+  try {
+    const user = await UserModel.findById(id);
+    return done(null, user);
+  } catch (error) {
+    return done(error);
+  }
 });
 
-passport.use(new LocalStrategy({ 
-        usernameField: "email" 
-    }, 
-    async (email, password, done) => {
-        try {
-            const user = await UserModel.findOne({ email });
-
-            if (user && user.verifyPasswordSync(password)) {
-                return done(null, user);
-            }
-
-            return done(null, false);
-        } catch (error) {
-            return done(error);
-        }
-    }
-));
-
-passport.use(new JwtStrategy(
+passport.use(
+  new LocalStrategy(
     {
-        jwtFromRequest: (req) => {
-            return (req && req.cookies) ? req.cookies["jwt"] : null;
-        },
-        secretOrKey: process.env.JWT_SECRET
+      usernameField: "email"
+    },
+    async (email, password, done) => {
+      try {
+        const user = await UserModel.findOne({ email });
+
+        if (user && user.verifyPasswordSync(password)) {
+          return done(null, user);
+        }
+
+        return done(null, false);
+      } catch (error) {
+        return done(error);
+      }
+    }
+  )
+);
+
+passport.use(
+  new JwtStrategy(
+    {
+      jwtFromRequest: req => {
+        return req && req.cookies ? req.cookies["jwt"] : null;
+      },
+      secretOrKey: process.env.JWT_SECRET
     },
     async (jwtPayload, done) => {
-        try {
-            const user = await UserModel.findById(jwtPayload.sub);
+      try {
+        const user = await UserModel.findById(jwtPayload.sub);
 
-            if (user) {
-                return done(null, user);
-            }
-
-            return done(null, false);
-        } catch(error) {
-            return done(error);
+        if (user) {
+          return done(null, user);
         }
-    } 
-));
+
+        return done(null, false);
+      } catch (error) {
+        return done(error);
+      }
+    }
+  )
+);
 
 // passport.use(new GoogleStrategy(
 //     {

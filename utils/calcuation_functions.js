@@ -9,10 +9,9 @@ return total;
 }
 
 function averageSaleVaue(sales, total){
-    if (sales.length > 0) {
-    return total / (sales.length);
-    }
-    return 0;
+     
+    return total / (sales.length) || 0;
+    
 
 }
 
