@@ -2,15 +2,17 @@ const ShiftModel = require("./../database/models/shift_model");
 const calculate = require("./../utils/calcuation_functions");
 
 async function index(req, res) {
-    let shifts = await ShiftModel.find();
+    let userId = req.user._id
+    let shifts = await ShiftModel.find({user: userId });
     res.render("shifts/index", {shifts});
 }
 
 async function create(req, res) {
     let {notes} = req.body;
-    let shift = await ShiftModel.create({notes})
+    let user = req.user;
+    let shift = await ShiftModel.create({notes, user})
     .catch(err => res.status(500).send(err));
-
+    console.log(shift, user)
     res.redirect("/shifts");
 
 }

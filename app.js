@@ -5,6 +5,7 @@ const methodOverride = require("method-override");
 const morgan = require("morgan");
 const expressSession = require("express-session");
 const MongoStore = require('connect-mongo')(expressSession);
+const CookieParser = require("cookie-parser");
 const app = express();
 const celebrate = require("celebrate");
 
@@ -12,6 +13,8 @@ const celebrate = require("celebrate");
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
+
+app.use(CookieParser());
 
 app.use(expressSession({
     secret: process.env.SESSION_SECRET,
