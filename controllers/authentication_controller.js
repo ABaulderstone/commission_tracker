@@ -1,0 +1,45 @@
+const UserModel = require("./../database/models/user_model");
+const jwt = require("jsonwebtoken");
+
+function registerNew(req, res) {
+    res.render("authentication/register");
+}
+
+async function registerCreate(req, res, next) {
+    const { name, email, password } = req.body;
+    const user = await UserModel.create({ name, email, password });
+    
+    req.login(user, (error) => {
+        if (error) {
+            return next(error);
+        }
+        const token = jwt.sign({ sub: req.user._id }, process.env.JWT_SECRET);
+        res.cookie("jwt", token);
+        return res.redirect("/dashboard");
+    });
+}
+
+function logout(req, res) {
+    req.logout();
+    res.cookie("jwt", null, { maxAge: -1 });
+    res.redirect("/");
+}
+
+function loginNew(req, res) {
+    res.render("authentication/login");
+}
+
+async function loginCreate(req, res) {
+    console.log(req.body);
+    const token = jwt.sign({ sub: req.user._id }, process.env.JWT_SECRET);
+    res.cookie("jwt", token);
+    res.redirect("/dashboard");
+}
+
+module.exports = {
+    registerNew,
+    registerCreate,
+    logout,
+    loginNew,
+    loginCreate
+}
