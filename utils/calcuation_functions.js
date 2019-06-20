@@ -23,7 +23,7 @@ function averageShiftTotal(shifts){
         total +=shift.total
     });
 
-    return (total / length);
+    return (total / length) || 0;
 
 }
 

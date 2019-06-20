@@ -3,6 +3,7 @@ const router = express.Router();
 const ShiftController = require("./../controllers/shift_controller");
 const SaleController = require("./../controllers/sale_controller");
 const {celebrate, Joi, errors} = require("celebrate");
+const passport = require("passport");
 
 router.get("/", ShiftController.index);
 

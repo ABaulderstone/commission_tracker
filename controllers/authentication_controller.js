@@ -30,7 +30,6 @@ function loginNew(req, res) {
 }
 
 async function loginCreate(req, res) {
-    console.log(req.body);
     const token = jwt.sign({ sub: req.user._id }, process.env.JWT_SECRET);
     res.cookie("jwt", token);
     res.redirect("/dashboard");

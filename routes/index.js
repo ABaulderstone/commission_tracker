@@ -19,5 +19,5 @@ router.post("/login", passport.authenticate("local", {
 }),
 AuthenticationController.loginCreate)
 
-router.use("/shifts", shiftRoutes);
+router.use("/shifts", passport.authenticate("jwt", { session: false }), shiftRoutes);
 module.exports = router;

@@ -9,7 +9,7 @@ async function index(req, res) {
 
  async function dashboard(req, res) { 
     const user = req.user;
-    let shifts = await ShiftModel.find();
+    let shifts = await ShiftModel.find({user: user._id});
     let avgShiftTotal = calculate.averageShiftTotal(shifts);
     res.render("pages/dashboard", {shifts, avgShiftTotal, user});
 }
