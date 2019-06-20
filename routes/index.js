@@ -6,7 +6,7 @@ const PageController = require("./../controllers/page_controller");
 const AuthenticationController = require("./../controllers/authentication_controller");
 
 router.get("/", PageController.index);
-router.get("/dashboard", PageController.dashboard)
+router.get("/dashboard", passport.authenticate("jwt", { session: false }), PageController.dashboard)
 
 router.get("/sign_up", AuthenticationController.registerNew);
 
